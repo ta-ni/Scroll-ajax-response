@@ -1,0 +1,51 @@
+.container {
+    margin: 0 auto;
+    width: 1170px;
+    text-align: center;
+}
+
+#scrollBox {
+
+}
+
+#content {
+    position:relative;
+    text-align: left;
+}
+
+.user-info {
+    border: 1px solid black;
+    margin: 20px 0;
+    position: relative;
+    padding: 40px 0;
+    color: dimgray;
+    font-size: 30px;
+}
+
+.user-info .user-text {
+    position: absolute;
+    left: 170px;
+}
+
+.user-info a {
+    display: inline-block;
+    text-decoration: none;
+    color: dimgray;
+    font-size: 30px;
+}
+
+.user-info a:hover {
+    color: #eb9316;
+}
+
+.user-avatar {
+    width: 130px;
+    height: 130px;
+    margin-left: 20px;
+}
+
+#loader {
+    width: 40px;
+    height: 40px;
+}
+
