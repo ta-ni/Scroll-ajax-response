@@ -1,19 +1,14 @@
-var api = 'https://api.github.com/',
-    option = {
-      page: 1,
-      perPage: 3
-    };
+var API = 'https://api.github.com/',
+    REPOS_PER_PAGE = 3,
+    currentPage = 1;
 
-
-showResult(option);
-scrollalert();
-
+showResult();
 
 //-------- ajax result-------
 
 function getAjaxResult(callback, option) {
   $.ajax({
-    url: api + 'users/octocat/repos?page='+ option.page +'&per_page='+ option.perPage,
+    url: API + 'users/octocat/repos?page='+ option.page +'&per_page='+ option.perPage,
     method: 'GET',
     beforeSend: function() { $('#loader').show();
     },
@@ -25,7 +20,13 @@ function getAjaxResult(callback, option) {
 }
 
 //-------- callback -----------
-function showResult(option){
+function showResult(){
+
+  var option = {
+    page: currentPage,
+    perPage: REPOS_PER_PAGE
+  };
+
   getAjaxResult(function (result) {
 
     $('#loader').hide();
@@ -58,22 +59,13 @@ function showResult(option){
   }, option);
 }
 
-console.log($('#scrollBox').scrollTop);
-
-
 //-------- scroll --------
 
-function scrollalert (){
+$(window).scroll(function() {
 
-  var scrollBox = $('#scrollBox'),
-      scrolltop = $(scrollBox).context.scrollingElement.scrollTop,
-      scrollheight = $(scrollBox).context.scrollingElement.scrollHeight,
-      windowheight = $(scrollBox).context.scrollingElement.clientHeight,
-      scrolloffset= 35;
+  if  ($(window).scrollTop() == $(document).height() - $(window).height()) {
 
-  if( scrolltop >= ( scrollheight - ( windowheight + scrolloffset )) ) {
-    option.page++;
-    showResult(option);
+    currentPage++;
+    showResult();
   }
-  setTimeout('scrollalert();', 1500);
-}
+});
