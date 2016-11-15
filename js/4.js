@@ -1,6 +1,7 @@
 var API = 'https://api.github.com/',
     REPOS_PER_PAGE = 3,
-    currentPage = 1;
+    currentPage = 1,
+    stopRequest = false;
 
 showResult();
 
@@ -30,6 +31,8 @@ function showResult(){
   getAjaxResult(function (result) {
 
     $('#loader').hide();
+
+    if(result.length === 0) return stopRequest = true;
 
     var html = [];
     var repo, text;
@@ -63,7 +66,7 @@ function showResult(){
 
 $(window).scroll(function() {
 
-  if  ($(window).scrollTop() == $(document).height() - $(window).height()) {
+  if (($(window).scrollTop() == $(document).height() - $(window).height()) && !(stopRequest)) {
 
     currentPage++;
     showResult();
